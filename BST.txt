@@ -1,0 +1,166 @@
+//Binary Search Tree
+
+class Node{
+    int data;
+    Node left,right;
+    
+    public Node(int data){
+        this.data = data;
+        this.left = this.right = null;
+    }
+}
+
+class Tree{
+    Node root;
+    Tree(int data){
+       this.root = new Node(data);
+    }
+    public Node addNode(Node root , int data){
+        if(root==null){
+           return new Node(data); 
+        }
+        if(root.data > data){
+           root.left = addNode(root.left , data);
+        }
+        else if(root.data<data){
+           root.right = addNode(root.right, data);
+        } 
+        return root;
+    }
+    public void addNode(int data){
+        addNode(root,data);
+    }
+    public void inOrder(Node root){
+        if(root!=null){
+        inOrder(root.left);
+        System.out.print(root.data+" ");
+        inOrder(root.right);
+        }
+    }
+    
+    public void preOrder(Node root){
+        if(root!=null){
+        System.out.print(root.data+" ");
+        preOrder(root.left);
+        preOrder(root.right);
+        }
+    }
+    
+      public void postOrder(Node root){
+        if(root!=null){
+        postOrder(root.left);
+        postOrder(root.right);
+        System.out.print(root.data+" ");
+        }
+    }
+        
+      public Node search(Node root, int data){
+          if(root == null || root.data == data){
+              return root;
+          }
+          if(root.data > data){
+             return search(root.left, data);
+          }
+          else if(root.data < data){
+             return search(root.right, data);
+          }
+          return root;
+      }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		Tree tree = new Tree(15);
+		tree.addNode(10);
+		tree.addNode(20);
+		tree.addNode(8);
+		tree.addNode(12);
+		tree.addNode(17);
+		tree.addNode(25);
+		tree.addNode(6);
+		tree.addNode(11);
+		tree.addNode(11);
+		tree.addNode(13);
+		tree.addNode(16);
+		tree.addNode(19);
+		tree.addNode(22);
+		tree.addNode(27);
+		tree.inOrder(tree.root);
+		System.out.println();
+		tree.preOrder(tree.root);
+		System.out.println();
+		tree.postOrder(tree.root);
+		System.out.println();
+		Node res = tree.search(tree.root,99);
+		if(res!=null && res.data==99){
+		    System.out.println("Found");
+		}
+		else{
+		    System.out.println("Not found");
+		}
+        System.out.println();
+	}
+}
+
+// In-Order Traversal:
+// 6 8 10 11 12 13 15 16 17 19 20 22 25 27 
+
+// Pre-Order Traversal:
+// 15 10 8 6 12 11 13 20 17 16 19 25 22 27 
+
+// Post-Order Traversal:
+// 6 8 11 13 12 10 16 19 17 22 27 25 20 15 
+
+-----------------------------------------------------------------------------------------
+
+//Merge sort
+
+import java.util.*;
+public class Main
+{
+    public static int[] mergeSort(int[]arr){
+        if(arr.length==1){
+            return arr;
+        }
+        int mid = arr.length/2;
+        int []left = mergeSort(Arrays.copyOfRange(arr, 0, mid));
+        int []right = mergeSort(Arrays.copyOfRange(arr, mid, arr.length));
+        return merge(left, right);
+    }
+    
+    public static int[] merge(int[]left,int[]right){
+        int i=0,j=0,k=0;
+        int[]mix=new int[left.length+right.length];
+        while(i<left.length && j<right.length){
+            if(left[i]<right[j]){
+                mix[k]=left[i];
+                i++;
+            }
+            else{
+                mix[k]=right[j];
+                j++;
+            }
+            k++;
+        }
+        while(i<left.length){
+             mix[k]=left[i];
+            i++;
+            k++;
+        }
+        while(j<right.length){
+             mix[k]=right[j];
+            j++;
+            k++;
+        }
+        return mix;
+    }
+    
+	public static void main(String[] args) {
+		int [] arr= {5,4,3,2,1};
+		arr = mergeSort(arr);
+		System.out.print(Arrays.toString(arr));
+	}
+}
+
+-------------------------------------------------------------------------
