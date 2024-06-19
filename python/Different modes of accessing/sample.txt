@@ -1,0 +1,1 @@
+Write mode removes all existing file content
