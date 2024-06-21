@@ -1,4 +1,7 @@
 import os
-import shutil
-shutil.rmtree('changed')
-print(os.listdir())
+from datetime import datetime
+
+ctime = os.stat('report.csv')
+epoch = ctime.st_mtime
+humanReadable = datetime.fromtimestamp(epoch)
+print(humanReadable)

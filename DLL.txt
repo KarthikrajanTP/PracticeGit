@@ -1,0 +1,90 @@
+
+class Node{
+    int data;
+    Node prev;
+    Node next;
+    Node(int data){
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+class DLL{
+    Node head;
+    Node tail;
+    DLL(){
+        this.head = null;
+        this.tail = null;
+    }
+    
+    public void addAtBeg(int data){
+        if(head==null){
+            Node node = new Node(data);
+            head = node;
+            tail = node;
+        }
+        else{
+            Node node = new Node(data);
+            head.prev = node;
+            node.next = head;
+            head = node;
+        }
+    }
+    
+    public void insertAtEnd(int data){
+        if(head==null){
+            addAtBeg(data);
+        }
+        else{
+            Node node = new Node(data);
+            tail.next = node;
+            node.prev = tail;
+            tail = node;
+        }
+    }
+    
+    public void display(){
+        Node temp = head;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp = temp.next;
+        }
+    }
+    
+    public void reverse(){
+        Node temp = tail;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp = temp.prev;
+        }
+    }
+    
+    public void delAtPos(int pos){
+        int index = 1;
+        Node temp = head;
+        while(index<pos){
+           temp = temp.next;
+           index++;
+        }
+        Node previous = temp.prev;
+        previous.next = temp.next;
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+	    DLL dll = new DLL();
+	    dll.insertAtEnd(10);
+	    dll.insertAtEnd(20);
+	    dll.insertAtEnd(30);
+	    dll.display();
+	    System.out.println();
+	    dll.delAtPos(2);
+	    System.out.println();
+	    dll.display();
+	   
+		
+	}
+}
